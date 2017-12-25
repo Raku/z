@@ -127,6 +127,10 @@ run stresstest, otherwise run spectest.
 
 ## Version Bumps
 
+Version bumping involves fetching new commits to repos
+using `git pull --rebase`. In [some cases that might not be what
+you want](https://rakudo.party/post/I-Botched-A-Perl-6-Release-And-Now-A-Robot-Is-Taking-My-Job)
+
 ### `bump` / `bump --no-push`
 
 ```bash
@@ -143,17 +147,48 @@ locally).
 
 Will prepare commit summaries for each of the commit messages.
 
-### `bump --no-push`
+### `bump m`
 
 ```bash
-$ z bump --no
+$ z bump m
 ```
 
-z bump m         # bump MoarVM version
-z bump n         # bump nqp version
-z bump push      # push already-done version bumps for MoarVM and nqp
-z bump push m    # push already-done version bump for MoarVM
-z bump push n    # push already-done version bump for nqp
+Bump MoarVM version only. Does not test or push.
+
+### `bump n`
+
+```bash
+$ z bump n
+```
+
+Bump nqp version only. Does not test or push.
+
+### `bump push`
+
+```bash
+$ z bump push
+```
+
+Push already prepared version bumps for MoarVM and nqp. Does `git pull --rebase`
+in nqp and rakudo's repos.
+
+### `bump push m`
+
+```bash
+$ z bump push m
+```
+
+Push already prepared version bump for MoarVM. Does `git pull --rebase`
+in nqp's repo.
+
+### `bump push n`
+
+```bash
+$ z bump push n
+```
+
+Push already prepared version bump for MoarVM. Does `git pull --rebase`
+in rakudo's repo.
 
 ----
 
