@@ -31,6 +31,13 @@ method make-links {
     $!inst.IO.add('bbin/perl6-m').symlink: 'perl6';
 }
 
+method spectest {
+    run :cwd($!rak), «make spectest»;
+}
+method stresstest {
+    run :cwd($!rak), «make stresstest»;
+}
+
 method re-make-moar {
     run :cwd($!moar), «make "-j$!cores"»;
     run :cwd($!moar), «make install»;

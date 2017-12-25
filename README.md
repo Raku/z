@@ -64,6 +64,21 @@ $ 6 m
 **Use after making changes to MoarVM's codebase.**
 Runs `make` and `make install` in MoarVM's repo.
 
+## `s`
+
+```bash
+$ 6 s
+```
+
+Runs `make spectest` in rakudo's repo.
+
+## `ss`
+
+```bash
+$ 6 ss
+```
+
+Runs `make stresstest` in rakudo's repo.
 ----
 
 #### REPOSITORY

@@ -17,9 +17,10 @@ multi MAIN('n', Bool :$test) {
     $rd.re-make-rakudo: :$test, :clean;
 }
 
-multi MAIN('m') {
-    $rd.re-make-moar;
-}
+multi MAIN('m') { $rd.re-make-moar; }
+
+multi MAIN('s')  { $rd.spectest;   }
+multi MAIN('ss') { $rd.stresstest; }
 
 multi MAIN(Bool:D :$init!) {
     $rd.init;
