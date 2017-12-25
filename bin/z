@@ -1,0 +1,49 @@
+#!/usr/bin/env perl6
+
+use lib $*PROGRAM.sibling: '../lib';
+use JSON::Fast;
+my $conf := from-json slurp $*PROGRAM.sibling: '../config.json';
+
+use RDev;
+
+my $rd := RDev.new: :$conf;
+
+multi MAIN(Bool :$test) {
+    $rd.re-make-rakudo: :$test;
+}
+
+multi MAIN('f') { $rd.pull-all; }
+multi MAIN('n', Bool :$test) {
+    $rd.re-make-nqp:    :$test;
+    $rd.re-make-rakudo: :$test, :clean;
+}
+
+multi MAIN('m') { $rd.re-make-moar; }
+
+multi MAIN('bs') { $rd.best-test;  }
+multi MAIN('s')  { $rd.spectest;   }
+multi MAIN('ss') { $rd.stresstest; }
+
+multi MAIN('bump', Bool :$no-push) {
+    $rd.bump-nqp: $rd.bump-moar;
+    unless $rd.best-test {
+        exit if $no-push
+            or 'y' ne lc prompt 'Had some test failures. Push anyway? [N/y]: '
+    }
+    $no-push or $rd.bump-push;
+}
+multi MAIN('bump', 'm')         { $rd.bump-moar; }
+multi MAIN('bump', 'n')         { $rd.bump-nqp;  }
+multi MAIN('bump', 'push')      { $rd.bump-push-moar; $rd.bump-push-nqp; }
+multi MAIN('bump', 'push', 'm') { $rd.bump-push-moar; }
+multi MAIN('bump', 'push', 'n') { $rd.bump-push-nqp;  }
+
+multi MAIN(Bool:D :$init!) {
+    $rd.init;
+    $rd.build-moar;
+    $rd.build-nqp:   :test;
+    $rd.build-rakudo :test;
+    $rd.make-links;
+}
+
+# multi MAIN(:$links!) { $rd.make-links; }

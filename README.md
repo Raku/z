@@ -5,25 +5,51 @@ Helper script for Rakudo Perl 6 core development
 # INSTALLATION
 
 ```bash
-mkdir ~/6 &&
-git clone https://github.com/zoffixznet/rdev ~/6 &&
+git clone https://github.com/zoffixznet/rdev ~/rdev &&
+cd ~/rdev &&
 zef --depsonly install .
 
-echo 'export PATH="$HOME/6/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/rdev/bin:$PATH"' >> ~/.bashrc
 . ~/.bashrc
 
-pico ~/6/config.json
+pico ~/rdev/config.json
 # set your build directory and other config, save, and close
 ```
 
-This installs command `6` into your PATH.
+**This installs command `z` into your PATH.**
+
+# COMMAND REFERENCE
+
+```
+z --init         # clone all repos and build everything
+z                # make, make install rakudo
+z --test         # make, make test, make install rakudo
+
+z n              # re-make nqp and rakudo
+z n --test       # re-make nqp and rakudo + run make test for both
+z m              # re-make MoarVM
+
+z s              # run spectest
+z ss             # run stresstest
+z bs             # run "best test" (have > 10 cores ?? stresstest !! spectest)
+
+z bump           # bump MoarVM and nqp + best test + bump push on success
+z bump --no-push # bump MoarVM and nqp + best test, but don't push
+z bump m         # bump MoarVM version
+z bump n         # bump nqp version
+z bump push      # push already-done version bumps for MoarVM and nqp
+z bump push m    # push already-done version bump for MoarVM
+z bump push n    # push already-done version bump for nqp
+```
 
 # USAGE
 
-## `--init`
+## Building
+
+### `--init`
 
 ```bash
-$ 6 --init
+$ z --init
 ```
 
 Initialize build dir (set as `"dir"` key in `~/6/config.json`).
@@ -31,54 +57,104 @@ Initialize build dir (set as `"dir"` key in `~/6/config.json`).
 This clones rakudo/nqp/MoarVM repos and builds everything into `install` dir
 inside the build dir.
 
-## (no args) / (no args) `--test`
+### `f`
 
 ```bash
-$ 6
+$ z f
+```
+
+Fetch any new commits to all repos. Uses `git pull --rebase`
+
+### (no args) / (no args) `--test`
+
+```bash
+$ z
 # or
-$ 6 --test
+$ z --test
 ```
 
 **Use after making changes to Rakudo's codebase.**
 Runs `make` and `make install` in rakudo's repo. Pass `--test` param to also
 run `make test`
 
-## `n` / `n --test`
+### `n` / `n --test`
 
 ```bash
-$ 6 n
+$ z n
 # or
-$ 6 n --test
+$ z n --test
 ```
 
 **Use after making changes to nqp's codebase.**
 Runs `make clean`, `make`, and `make install` in nqp's and rakudo's repos.
 Pass `--test` param to also run `make test`
 
-## `m`
+### `m`
 
 ```bash
-$ 6 m
+$ z m
 ```
 
 **Use after making changes to MoarVM's codebase.**
 Runs `make` and `make install` in MoarVM's repo.
 
-## `s`
+## Testing
+
+### `s`
 
 ```bash
-$ 6 s
+$ z s
 ```
 
 Runs `make spectest` in rakudo's repo.
 
-## `ss`
+### `ss`
 
 ```bash
-$ 6 ss
+$ z ss
 ```
 
 Runs `make stresstest` in rakudo's repo.
+
+### `bs`
+
+```bash
+$ z bs
+```
+
+Runs "best test" in rakudo's repo. If the box we're on has more than 10 cores,
+run stresstest, otherwise run spectest.
+
+## Version Bumps
+
+### `bump` / `bump --no-push`
+
+```bash
+$ z bump
+# or
+$ z bump --no-push
+```
+
+Bumps MoarVM version in NQP, then bumps NQP version in Rakudo, runs "best test"
+(see above) and automatically pushes the changes to the repos if the best test
+passes. If it fails, will ask whether to push changes or not. Will not push
+anything to the repo if `--no-push` was specified (commits will remain committed
+locally).
+
+Will prepare commit summaries for each of the commit messages.
+
+### `bump --no-push`
+
+```bash
+$ z bump --no
+```
+
+z bump m         # bump MoarVM version
+z bump n         # bump nqp version
+z bump push      # push already-done version bumps for MoarVM and nqp
+z bump push m    # push already-done version bump for MoarVM
+z bump push n    # push already-done version bump for nqp
+
 ----
 
 #### REPOSITORY
