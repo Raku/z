@@ -27,6 +27,10 @@ method init {
     run «git clone https://github.com/MoarVM/MoarVM "$!moar"»;
 }
 
+method make-links {
+    $!inst.add('install/bin/perl6-m').symlink: 'perl6';
+}
+
 method re-make-moar {
     run :cwd($!moar), «make "-j$!cores"»;
     run :cwd($!moar), «make install»;
