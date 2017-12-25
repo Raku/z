@@ -23,7 +23,7 @@ This installs command `6` into your PATH.
 ## `--init`
 
 ```bash
-6 --init
+$ 6 --init
 ```
 
 Initialize build dir (set as `"dir"` key in `~/6/config.json`).
@@ -34,11 +34,9 @@ inside the build dir.
 ## (no args) / (no args) `--test`
 
 ```bash
-6
-```
-
-```bash
-6 --test
+$ 6
+# or
+$ 6 --test
 ```
 
 Runs `make` and `make install` in rakudo's repo. Pass `--test` param to also
