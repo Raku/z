@@ -52,7 +52,7 @@ z bump push n    # push already-done version bump for nqp
 $ z --init
 ```
 
-Initialize build dir (set as `"dir"` key in `~/6/config.json`).
+Initialize build dir (set as `"dir"` key in `~/rdev/config.json`).
 
 This clones rakudo/nqp/MoarVM repos and builds everything into `install` dir
 inside the build dir.
