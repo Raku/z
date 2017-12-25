@@ -28,7 +28,7 @@ method init {
 }
 
 method make-links {
-    $!inst.IO.add('bin/perl6-m').symlink: 'perl6';
+    $!inst.IO.add('bbin/perl6-m').symlink: 'perl6';
 }
 
 method re-make-moar {
@@ -37,12 +37,14 @@ method re-make-moar {
 }
 method re-make-nqp(Bool :$test) {
     my $cwd := $!nqp;
+    run :$cwd, «make clean»;
     run :$cwd, «make "-j$!cores"»;
     run :$cwd, «make test» if $test;
     run :$cwd, «make install»;
 }
-method re-make-rakudo(Bool :$test) {
+method re-make-rakudo(Bool :$test, Bool :$clean) {
     my $cwd := $!rak;
+    run :$cwd, «make clean» if $clean;
     run :$cwd, «make "-j$!cores"»;
     run :$cwd, «make test» if $test;
     run :$cwd, «make install»;

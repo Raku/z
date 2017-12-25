@@ -39,8 +39,30 @@ $ 6
 $ 6 --test
 ```
 
+**Use after making changes to Rakudo's codebase.**
 Runs `make` and `make install` in rakudo's repo. Pass `--test` param to also
 run `make test`
+
+## `n` / `n --test`
+
+```bash
+$ 6 n
+# or
+$ 6 n --test
+```
+
+**Use after making changes to nqp's codebase.**
+Runs `make clean`, `make`, and `make install` in nqp's and rakudo's repos.
+Pass `--test` param to also run `make test`
+
+## `m`
+
+```bash
+$ 6 m
+```
+
+**Use after making changes to MoarVM's codebase.**
+Runs `make` and `make install` in MoarVM's repo.
 
 ----
 

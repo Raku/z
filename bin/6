@@ -8,8 +8,17 @@ use RDev;
 
 my $rd := RDev.new: :$conf;
 
-multi MAIN(Bool:D :$test = False) {
+multi MAIN(Bool :$test) {
     $rd.re-make-rakudo: :$test;
+}
+
+multi MAIN('n', Bool :$test) {
+    $rd.re-make-nqp:    :$test;
+    $rd.re-make-rakudo: :$test, :clean;
+}
+
+multi MAIN('m') {
+    $rd.re-make-moar;
 }
 
 multi MAIN(Bool:D :$init!) {
