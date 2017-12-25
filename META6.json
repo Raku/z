@@ -1,0 +1,18 @@
+{
+    "perl"         : "6.c",
+    "name"         : "rdev",
+    "license"      : "Artistic-2.0",
+    "version"      : "1.001001",
+    "description"  : "Helper script for Rakudo Perl 6 core development",
+    "tags"         : [ "core dev" ],
+    "depends"      : [
+        "JSON::Fast"
+    ],
+    "test-depends" : [
+    ],
+    "provides"     : {
+        "lib" : "lib/RDev.pm6"
+    },
+    "authors"       : ["Zoffix Znet"],
+    "support"       : {"source"   : "https://github.com/zoffixznet/rdev.git"}
+}
