@@ -22,9 +22,9 @@ pico ~/rdev/config.json
 
 ```
 z --init         # clone all repos and build everything
-z                # make, make install rakudo
-z --test         # make, make test, make install rakudo
 
+z                # re-make rakudo
+z --test         # re-make rakudo + run make test
 z n              # re-make nqp and rakudo
 z n --test       # re-make nqp and rakudo + run make test for both
 z m              # re-make MoarVM
