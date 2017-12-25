@@ -28,7 +28,7 @@ method init {
 }
 
 method make-links {
-    $!inst.add('install/bin/perl6-m').symlink: 'perl6';
+    $!inst.IO.add('bin/perl6-m').symlink: 'perl6';
 }
 
 method re-make-moar {
