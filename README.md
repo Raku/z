@@ -9,7 +9,7 @@ mkdir ~/6 &&
 git clone https://github.com/zoffixznet/rdev ~/6 &&
 zef --depsonly install .
 
-echo 'export PATH="$HOME/6:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/6/bin:$PATH"' >> ~/.bashrc
 . ~/.bashrc
 
 pico ~/6/config.json
