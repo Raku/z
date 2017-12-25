@@ -7,7 +7,7 @@ my $conf := from-json slurp $*PROGRAM.sibling: '../config.json';
 use RDev;
 
 my $rd := RDev.new: :$conf;
-
+my %*SUB-MAIN-OPTS = :named-anywhere;
 multi MAIN(Bool :$test) {
     $rd.re-make-rakudo: :$test;
 }
