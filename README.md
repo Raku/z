@@ -40,6 +40,11 @@ z bump n         # bump nqp version
 z bump push      # push already-done version bumps for MoarVM and nqp
 z bump push m    # push already-done version bump for MoarVM
 z bump push n    # push already-done version bump for nqp
+
+z mod Some Module         # install modules 'Some' and 'Module', without tests
+z mod Some Module --tests # install modules 'Some' and 'Module', with tests
+z umod Some Module        # uninstall modules 'Some' and 'Module'
+z modi5                   # install Inline::Perl5 module
 ```
 
 # USAGE
@@ -189,6 +194,38 @@ $ z bump push n
 
 Push already prepared version bump for MoarVM. Does `git pull --rebase`
 in rakudo's repo.
+
+
+## Module Management
+
+### `z mod […]` / `z mod […] --tests`
+
+```bash
+$ z mod WWW Testo Cro
+# or
+$ z mod --tests WWW Testo Cro
+```
+
+Installs listed modules, skipping tests unless `--tests` argument is given.
+Downloads and installs [`zef`](https://modules.perl6.org/repo/zef), if needed.
+
+### `z umod […]`
+
+```bash
+$ z umod WWW Testo Cro
+```
+
+Uninstalls listed modules.
+Downloads and installs [`zef`](https://modules.perl6.org/repo/zef), if needed.
+
+### `z modi5`
+
+```bash
+$ z modi5
+```
+
+Installs [`Inline::Perl5`](https://modules.perl6.org/repo/Inline::Perl5).
+Downloads and installs [`zef`](https://modules.perl6.org/repo/zef), if needed.
 
 ----
 
