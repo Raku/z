@@ -5,11 +5,11 @@ Helper script for Rakudo Perl 6 core development
 # INSTALLATION
 
 ```bash
-git clone https://github.com/zoffixznet/rdev ~/rdev &&
-cd ~/rdev &&
+git clone https://github.com/zoffixznet/z ~/zscript &&
+cd ~/zscript &&
 zef --depsonly install .
 
-echo 'export PATH="$HOME/rdev/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/zscript/bin:$PATH"' >> ~/.bashrc
 . ~/.bashrc
 
 pico ~/rdev/config.json
@@ -57,7 +57,7 @@ z modi5                   # install Inline::Perl5 module
 $ z --init
 ```
 
-Initialize build dir (set as `"dir"` key in `~/rdev/config.json`).
+Initialize build dir (set as `"dir"` key in `~/zscript/config.json`).
 
 This clones rakudo/nqp/MoarVM repos and builds everything into `install` dir
 inside the build dir.
