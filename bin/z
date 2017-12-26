@@ -44,6 +44,7 @@ multi MAIN(Bool:D :$init!) {
     $rd.build-nqp:   :test;
     $rd.build-rakudo :test;
     $rd.make-links;
+    MAIN 'modi5';
 }
 
 multi MAIN('modi5') {
