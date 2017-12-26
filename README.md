@@ -232,12 +232,12 @@ Downloads and installs [`zef`](https://modules.perl6.org/repo/zef), if needed.
 #### REPOSITORY
 
 Fork this module on GitHub:
-https://github.com/zoffixznet/rdev
+https://github.com/zoffixznet/z
 
 #### BUGS
 
 To report bugs or request features, please use
-https://github.com/zoffixznet/rdev/issues
+https://github.com/zoffixznet/z/issues
 
 #### AUTHOR
 
