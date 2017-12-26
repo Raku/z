@@ -1,4 +1,5 @@
 unit class RDev;
+use Temp::Path;
 
 has %.conf is required;
 has IO::Path $!dir;
@@ -117,11 +118,34 @@ method pull-all {
     self!pull-rak;
     self!pull-spec;
 }
-
 method !pull-moar { self!run-moar: «git pull --rebase» }
 method !pull-nqp  { self!run-nqp:  «git pull --rebase» }
 method !pull-rak  { self!run-rak:  «git pull --rebase» }
 method !pull-spec { self!run-spec: «git pull --rebase» }
+
+method !init-zef {
+    temp %*ENV<PATH> = my $path = join ($*DISTRO.is-win ?? ";" !! ":"),
+        $!inst.IO.add('bin').absolute,
+        $!inst.IO.add('share/perl6/site/bin').absolute,
+        $*SPEC.path;
+
+    unless run :!out, :!err, «zef --help» {
+        indir make-temp-dir, {
+            run «git clone https://github.com/ugexe/zef .»;
+            run «perl6 -Ilib bin/zef install .»;
+        }
+    }
+
+    $path;
+}
+method install-modules(@mods, Bool :$tests) {
+    temp %*ENV<PATH> = self!init-zef;
+    run «zef --debug --/serial», |('--/test' unless $tests), 'install', |@mods;
+}
+method uninstall-modules(@mods) {
+    temp %*ENV<PATH> = self!init-zef;
+    run «zef --debug uninstall», |@mods;
+}
 
 method spectest {
     self!run-rak: «make spectest»;

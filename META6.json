@@ -6,7 +6,8 @@
     "description"  : "Helper script for Rakudo Perl 6 core development",
     "tags"         : [ "core dev" ],
     "depends"      : [
-        "JSON::Fast"
+        "JSON::Fast",
+        "Temp::Path"
     ],
     "test-depends" : [
     ],

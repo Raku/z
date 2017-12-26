@@ -46,4 +46,16 @@ multi MAIN(Bool:D :$init!) {
     $rd.make-links;
 }
 
+multi MAIN('modi5') {
+    $rd.install-modules: ['Inline::Perl5'], :!tests;
+}
+
+multi MAIN('mod', *@modules-to-install where +*, Bool :$tests) {
+    $rd.install-modules: @modules-to-install, :$tests;
+}
+
+multi MAIN('umod', *@modules-to-uninstall where +*) {
+    $rd.uninstall-modules: @modules-to-uninstall;
+}
+
 # multi MAIN(:$links!) { $rd.make-links; }
