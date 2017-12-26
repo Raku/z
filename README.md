@@ -1,4 +1,4 @@
-# rdev
+# Z-Script
 
 Helper script for Rakudo Perl 6 core development
 
