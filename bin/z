@@ -61,4 +61,4 @@ multi MAIN('umod', *@modules-to-uninstall where +*) {
     $rd.uninstall-modules: @modules-to-uninstall;
 }
 
-# multi MAIN(:$links!) { $rd.make-links; }
+multi MAIN(:$links!) { $rd.make-links; }

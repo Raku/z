@@ -32,7 +32,7 @@ method init {
 }
 
 method make-links {
-    $!inst.IO.add('bbin/perl6-m').symlink: 'perl6';
+    $!inst.IO.add('bin/perl6-m').symlink: 'perl6';
 }
 
 method best-test {
