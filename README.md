@@ -12,7 +12,7 @@ zef --depsonly install .
 echo 'export PATH="$HOME/zscript/bin:$PATH"' >> ~/.bashrc
 . ~/.bashrc
 
-pico ~/rdev/config.json
+pico ~/zscript/config.json
 # set your build directory and other config, save, and close
 ```
 
