@@ -102,11 +102,14 @@ method bump-nqp (Str:D $moar-log = '') {
     $log
 }
 
+method bump-push {
+    self.bump-push-moar;
+    self.bump-push-nqp;
+}
 method bump-push-moar {
     self!run-nqp: «git pull --rebase»;
     self!run-nqp: «git push»;
 }
-
 method bump-push-nqp {
     self!run-rak: «git pull --rebase»;
     self!run-rak: «git push»;
