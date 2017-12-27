@@ -144,7 +144,8 @@ $ z bump
 $ z bump --no-push
 ```
 
-Bumps MoarVM version in NQP, then bumps NQP version in Rakudo, runs "best test"
+Bumps MoarVM version in NQP, then bumps NQP version in Rakudo, re-"make"s nqp
+and rakudo, running their test suites, and then runs "best test"
 (see above) and automatically pushes the changes to the repos if the best test
 passes. If it fails, will ask whether to push changes or not. Will not push
 anything to the repo if `--no-push` was specified (commits will remain committed

@@ -26,6 +26,8 @@ multi MAIN('ss') { $rd.stresstest; }
 
 multi MAIN('bump', Bool :$no-push) {
     $rd.bump-nqp: $rd.bump-moar;
+    $rd.re-make-nqp:    :test;
+    $rd.re-make-rakudo: :test, :clean;
     unless $rd.best-test {
         exit if $no-push
             or 'y' ne lc prompt 'Had some test failures. Push anyway? [N/y]: '

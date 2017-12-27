@@ -2,7 +2,7 @@
     "perl"         : "6.c",
     "name"         : "Z-Script",
     "license"      : "Artistic-2.0",
-    "version"      : "1.001001",
+    "version"      : "1.001002",
     "description"  : "Helper script for Rakudo Perl 6 core development",
     "tags"         : [ "core dev" ],
     "depends"      : [
