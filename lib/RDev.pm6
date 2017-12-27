@@ -66,7 +66,7 @@ method bump-moar {
         ~ "https://github.com/MoarVM/MoarVM/compare/$before...$after"
         ~ ("\n$log\n" if $log);
     say "$title\n\n$log".indent: 8;
-    self!run-nqp: «git commit VERSION -m "$title" -m "$log"»;
+    self!run-nqp: «git commit "$ver-file.absolute()" -m "$title" -m "$log"»;
     $log
 }
 
