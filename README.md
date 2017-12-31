@@ -59,8 +59,8 @@ $ z --init
 
 Initialize build dir (set as `"dir"` key in `~/zscript/config.json`).
 
-This clones rakudo/nqp/MoarVM repos and builds everything into `install` dir
-inside the build dir.
+This clones rakudo/nqp/MoarVM/roast/doc repos and builds everything into
+`install` dir inside the build dir.
 
 ### `f`
 

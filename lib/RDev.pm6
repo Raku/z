@@ -5,6 +5,7 @@ has %.conf is required;
 has IO::Path $!dir;
 has Str $!rak;
 has Str $!nqp;
+has Str $!doc;
 has Str $!moar;
 has Str $!spec;
 has Str $!inst;
@@ -17,6 +18,7 @@ submethod TWEAK {
     with $!dir {
         $!rak  = .add('rakudo' ).absolute;
         $!nqp  = .add('nqp'    ).absolute;
+        $!doc  = .add('doc'    ).absolute;
         $!moar = .add('MoarVM' ).absolute;
         $!inst = .add('install').absolute;
         $!spec = .add('rakudo/t/spec/').absolute;
@@ -28,6 +30,7 @@ method init {
     run «git clone https://github.com/rakudo/rakudo "$!rak"»;
     run «git clone https://github.com/perl6/roast   "$!spec"»;
     run «git clone https://github.com/perl6/nqp     "$!nqp"»;
+    run «git clone https://github.com/perl6/doc     "$!doc"»;
     run «git clone https://github.com/MoarVM/MoarVM "$!moar"»;
 }
 
@@ -120,11 +123,13 @@ method pull-all {
     self!pull-nqp;
     self!pull-rak;
     self!pull-spec;
+    self!pull-doc;
 }
 method !pull-moar { self!run-moar: «git pull --rebase» }
 method !pull-nqp  { self!run-nqp:  «git pull --rebase» }
 method !pull-rak  { self!run-rak:  «git pull --rebase» }
 method !pull-spec { self!run-spec: «git pull --rebase» }
+method !pull-doc  { self!run-doc:  «git pull --rebase» }
 
 method !init-zef {
     temp %*ENV<PATH> = my $path = join ($*DISTRO.is-win ?? ";" !! ":"),
@@ -198,11 +203,13 @@ method !run-moar (|c) { run :cwd($!moar), |c }
 method !run-nqp  (|c) { run :cwd($!nqp),  |c }
 method !run-rak  (|c) { run :cwd($!rak),  |c }
 method !run-spec (|c) { run :cwd($!spec), |c }
+method !run-doc  (|c) { run :cwd($!doc),  |c }
 
 method !run-moar-out (|c) { self!run-moar(|c, :out).out.slurp(:close).trim }
 method !run-nqp-out  (|c) { self!run-nqp( |c, :out).out.slurp(:close).trim }
 method !run-rak-out  (|c) { self!run-rak( |c, :out).out.slurp(:close).trim }
 method !run-spec-out (|c) { self!run-spec(|c, :out).out.slurp(:close).trim }
+method !run-doc-out  (|c) { self!run-doc( |c, :out).out.slurp(:close).trim }
 
 method !trim (Str:D $str, UInt:D $max) {
     $str.chars > $max
