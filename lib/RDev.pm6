@@ -162,6 +162,10 @@ method stresstest {
     self!run-rak: «make stresstest»;
 }
 
+method re-make-moar-debug {
+    self!run-moar: «perl Configure.pl "--prefix=$!inst" --no-optimize»;
+    self.re-make-moar
+}
 method re-make-moar {
     self!run-moar: «make "-j$!cores"»;
     self!run-moar: «make install»;

@@ -28,6 +28,7 @@ z --test         # re-make rakudo + run make test
 z n              # re-make nqp and rakudo
 z n --test       # re-make nqp and rakudo + run make test for both
 z m              # re-make MoarVM
+z md             # re-make MoarVM DEBUG (with --no-optimize)
 
 z s              # run spectest
 z ss             # run stresstest
