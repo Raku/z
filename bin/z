@@ -18,8 +18,9 @@ multi MAIN('n', Bool :$test) {
     $rd.re-make-rakudo: :$test, :clean;
 }
 
-multi MAIN('m')  { $rd.re-make-moar; }
-multi MAIN('md') { $rd.re-make-moar-debug; }
+multi MAIN('m')   { $rd.re-make-moar; }
+multi MAIN('md')  { $rd.re-make-moar-debug; }
+multi MAIN('mnd') { $rd.build-moar; }
 
 multi MAIN('bs') { $rd.best-test;  }
 multi MAIN('s')  { $rd.spectest;   }

@@ -156,9 +156,11 @@ method uninstall-modules(@mods) {
 }
 
 method spectest {
+    self!run-rak: «make test»;
     self!run-rak: «make spectest»;
 }
 method stresstest {
+    self!run-rak: «make test»;
     self!run-rak: «make stresstest»;
 }
 

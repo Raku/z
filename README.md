@@ -28,10 +28,11 @@ z --test         # re-make rakudo + run make test
 z n              # re-make nqp and rakudo
 z n --test       # re-make nqp and rakudo + run make test for both
 z m              # re-make MoarVM
-z md             # re-make MoarVM DEBUG (with --no-optimize)
+z md             # re-make MoarVM after reconf with DEBUG (with --no-optimize)
+z mnd            # re-make MoarVM after reconf with no DEBUG
 
-z s              # run spectest
-z ss             # run stresstest
+z s              # run rakudo's make test + spectest
+z ss             # run rakudo's make test + stresstest
 z bs             # run "best test" (have > 10 cores ?? stresstest !! spectest)
 
 z bump           # bump MoarVM and nqp + best test + bump push on success
