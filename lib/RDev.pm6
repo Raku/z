@@ -119,10 +119,15 @@ method bump-push-nqp {
 }
 
 method pull-all {
+    say "Pulling MoarVM";
     self!pull-moar;
+    say "Pulling NQP";
     self!pull-nqp;
+    say "Pulling Rakudo";
     self!pull-rak;
+    say "Pulling Roast";
     self!pull-spec;
+    say "Pulling Docs";
     self!pull-doc;
 }
 method !pull-moar { self!run-moar: «git pull --rebase» }
