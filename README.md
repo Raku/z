@@ -23,7 +23,7 @@ pico ~/zscript/config.json
 ```
 z --init         # clone all repos and build everything
 
-z z              # pulls all repos and rebuilds MoarVM, nqp and Rakudo
+z z              # pulls all repos and rebuilds MoarVM, nqp, and Rakudo
 z f              # pulls updates into all repos
 z                # re-make rakudo
 z --test         # re-make rakudo + run make test

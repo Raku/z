@@ -16,6 +16,7 @@ multi MAIN('z') {
     $rd.pull-all;
     $rd.build-moar;
     $rd.re-make-nqp;
+    $rd.re-make-rakudo;
 }
 multi MAIN('f') { $rd.pull-all; }
 multi MAIN('n', Bool :$test) {
