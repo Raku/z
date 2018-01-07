@@ -48,8 +48,8 @@ multi MAIN('bump', 'push')      { $rd.bump-push; }
 multi MAIN('bump', 'push', 'm') { $rd.bump-push-moar; }
 multi MAIN('bump', 'push', 'n') { $rd.bump-push-nqp;  }
 
-multi MAIN(Bool:D :$init!) {
-    $rd.init;
+multi MAIN('init', $dir = '.'.IO) {
+    $rd.init: $dir;
     $rd.build-moar;
     $rd.build-nqp:   :test;
     $rd.build-rakudo :test;

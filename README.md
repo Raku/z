@@ -21,7 +21,8 @@ pico ~/zscript/config.json
 # COMMAND REFERENCE
 
 ```
-z --init         # clone all repos and build everything
+z init Some-Dir  # clone all repos and build everything inside Some-Dir
+                 # Some-Dir defaults to `.`; must be empty
 
 z z              # pulls all repos and rebuilds MoarVM, nqp, and Rakudo
 z f              # pulls updates into all repos

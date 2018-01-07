@@ -25,7 +25,8 @@ submethod TWEAK {
     }
 }
 
-method init {
+method init (IO() $dir = '.'.IO) {
+    $dir.dir.so and die "Init dir `$dir.absolute()` must be empty.";
     .mkdir for $!dir, $!rak.IO, $!nqp.IO, $!moar.IO, $!inst.IO;
     run «git clone https://github.com/rakudo/rakudo "$!rak"»;
     run «git clone https://github.com/perl6/roast   "$!spec"»;
