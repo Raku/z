@@ -15,5 +15,5 @@
         "lib" : "lib/RDev.pm6"
     },
     "authors"       : ["Zoffix Znet"],
-    "support"       : {"source"   : "https://github.com/zoffixznet/rdev.git"}
+    "support"       : {"source"   : "https://github.com/zoffixznet/z.git"}
 }
