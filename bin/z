@@ -2,6 +2,7 @@
 
 use lib $*PROGRAM.sibling: '../lib';
 my $conf := $*PROGRAM.sibling: '../config.json';
+$conf.e or $conf.spurt: '{}';
 
 use RDev;
 
