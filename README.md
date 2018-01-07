@@ -63,6 +63,8 @@ vm d                # sync doc changes
 vm m                # sync moar changes
 vm n                # sync nqp changes
 vm r                # sync rakudo changes
+vm SCRUB            # run `git reset --hard` in all local repos and pull
+                    # new commits. This *** DELETES ALL YOUR CHANGES ***
 ```
 
 ----

@@ -88,3 +88,4 @@ multi MAIN('vm', 'd') { $rd.sync-vm-doc  }
 multi MAIN('vm', 'm') { $rd.sync-vm-moar }
 multi MAIN('vm', 'n') { $rd.sync-vm-nqp  }
 multi MAIN('vm', 'r') { $rd.sync-vm-rak  }
+multi MAIN('vm', 'SCRUB') { $rd.vm-SCRUB }

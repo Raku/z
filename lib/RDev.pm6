@@ -333,7 +333,21 @@ method sync-vm-rak {
         my $from := "$dir-from/rakudo/$file";
         my $to   := "$dir-to/rakudo/$file";
         self!run-inst:
-            «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
+            «rsync -rlpgoD -vz --del -h --delete-missing-args»,
             $from, "$user\@$ip:$to";
+    }
+}
+
+method vm-SCRUB {
+    if prompt('SCRUB stuff? Are you sure? [Y/n]: ').lc eq 'y' {
+        self!run-moar: «git reset --hard»;
+        self!run-nqp:  «git reset --hard»;
+        self!run-rak:  «git reset --hard»;
+        self!run-spec: «git reset --hard»;
+        self!run-doc:  «git reset --hard»;
+        self.pull-all;
+    }
+    else {
+        say "OK. Aborting";
     }
 }
