@@ -1,7 +1,10 @@
 unit class RDev;
 use Temp::Path;
+use Config::JSON '';
 
-has %.conf is required;
+has IO::Path:D $.conf is required;
+has &!c  = &jconf      .assuming: $!conf;
+has &!cw = &jconf-write.assuming: $!conf;
 has IO::Path $!dir;
 has Str $!rak;
 has Str $!nqp;
@@ -11,11 +14,10 @@ has Str $!spec;
 has Str $!inst;
 has Int $!cores = Kernel.cpu-cores * 2;
 
-submethod TWEAK {
-    %!conf<dir> andthen $!dir = .IO orelse
-        die "Missing `dir` param in configuration";
-
-    with $!dir {
+submethod TWEAK { self!init-dirs }
+method !init-dirs {
+    with &!c('dir') -> IO() $_ {
+        $!dir  = $_;
         $!rak  = .add('rakudo' ).absolute;
         $!nqp  = .add('nqp'    ).absolute;
         $!doc  = .add('doc'    ).absolute;
@@ -23,10 +25,15 @@ submethod TWEAK {
         $!inst = .add('install').absolute;
         $!spec = .add('rakudo/t/spec/').absolute;
     }
+    else {
+        warn '"dir" key not found in config. Please run `--init` command'
+    }
 }
 
-method init (IO() $dir = '.'.IO) {
-    $dir.dir.so and die "Init dir `$dir.absolute()` must be empty.";
+method init (IO() $!dir = '.'.IO) {
+    $!dir.dir.so and die "Init dir `$!dir.absolute()` must be empty.";
+    &!cw('dir', $!dir.absolute);
+    self!init-dirs;
     .mkdir for $!dir, $!rak.IO, $!nqp.IO, $!moar.IO, $!inst.IO;
     run «git clone https://github.com/rakudo/rakudo "$!rak"»;
     run «git clone https://github.com/perl6/roast   "$!spec"»;
@@ -227,4 +234,14 @@ method !trim (Str:D $str, UInt:D $max) {
     $str.chars > $max
         ?? $str.substr(0, $max-4) ~ ' […]'
         !! $str
+}
+
+
+multi method print-conf (Str:D $prop) { say &!c($prop) // 'no such property' }
+multi method print-conf (Whatever) {
+    say .fmt: '%-20s => %-20s' for &!c(*)
+}
+method set-conf (Str:D $prop, Str:D $value) {
+    &!cw($prop, $value);
+    $value
 }
