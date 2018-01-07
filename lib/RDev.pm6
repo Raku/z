@@ -266,11 +266,50 @@ method sync-vm {
         &!cw('vm-dir', $dir-to);
     }
 
-    # rsync cares a lot about trailing slashes
     .subst: / '/'+ $ /, '' for $dir-to, $dir-from;
 
-    self!run-inst: «
-        rsync -avz --del -h --exclude .precomp
-        "$dir-from" "$user\@$ip:$dir-to"
-    »
+    self!run-spec-out(«git status --porcelain»).lines.map: {
+        my $file := .trim.split(/\s+/, 2).tail;
+        my $from := "$dir-from/rakudo/t/spec/$file";
+        my $to   := "$dir-to/rakudo/t/spec/$file";
+        self!run-inst:
+            «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
+            $from, "$user\@$ip:$to";
+    }
+
+    self!run-doc-out(«git status --porcelain»).lines.map: {
+        my $file := .trim.split(/\s+/, 2).tail;
+        my $from := "$dir-from/doc/$file";
+        my $to   := "$dir-to/doc/$file";
+        self!run-inst:
+            «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
+            $from, "$user\@$ip:$to";
+    }
+
+    self!run-moar-out(«git status --porcelain»).lines.map: {
+        my $file := .trim.split(/\s+/, 2).tail;
+        my $from := "$dir-from/MoarVM/$file";
+        my $to   := "$dir-to/MoarVM/$file";
+        self!run-inst:
+            «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
+            $from, "$user\@$ip:$to";
+    }
+
+    self!run-nqp-out(«git status --porcelain»).lines.map: {
+        my $file := .trim.split(/\s+/, 2).tail;
+        my $from := "$dir-from/nqp/$file";
+        my $to   := "$dir-to/nqp/$file";
+        self!run-inst:
+            «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
+            $from, "$user\@$ip:$to";
+    }
+
+    self!run-rak-out(«git status --porcelain»).lines.map: {
+        my $file := .trim.split(/\s+/, 2).tail;
+        my $from := "$dir-from/rakudo/$file";
+        my $to   := "$dir-to/rakudo/$file";
+        self!run-inst:
+            «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
+            $from, "$user\@$ip:$to";
+    }
 }
