@@ -64,7 +64,10 @@ vm m                # sync moar changes
 vm n                # sync nqp changes
 vm r                # sync rakudo changes
 vm SCRUB            # run `git reset --hard` in all local repos and pull
-                    # new commits. This *** DELETES ALL YOUR CHANGES ***
+                    # new commits. This *** DELETES ALL LOCAL YOUR CHANGES ***
+                    # Yup. LOCAL, not VM. It's under `vm` because you'd use
+                    # this command to sync local when editing locally and
+                    # committing remotely
 ```
 
 ----
