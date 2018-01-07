@@ -248,7 +248,7 @@ method set-conf (Str:D $prop, Str:D $value) {
     $value
 }
 
-method sync-vm {
+method !sync-vm-creds {
     my ($ip, $user, $dir-to, $dir-from)
     = &!c('vm-ip'), &!c('vm-user'), &!c('vm-dir'), &!c('dir');
     if $ip ~~ Failure {
@@ -265,9 +265,18 @@ method sync-vm {
         $dir-to.IO.is-absolute or die "Must be absolute path";
         &!cw('vm-dir', $dir-to);
     }
-
     .subst: / '/'+ $ /, '' for $dir-to, $dir-from;
-
+    ($ip, $user, $dir-to, $dir-from)
+}
+method sync-vm {
+    self.sync-vm-spec;
+    self.sync-vm-doc;
+    self.sync-vm-moar;
+    self.sync-vm-nqp;
+    self.sync-vm-rak;
+}
+method sync-vm-spec {
+    my ($ip, $user, $dir-to, $dir-from) = self!sync-vm-creds;
     self!run-spec-out(«git status --porcelain»).lines.map: {
         my $file := .trim.split(/\s+/, 2).tail;
         my $from := "$dir-from/rakudo/t/spec/$file";
@@ -276,7 +285,10 @@ method sync-vm {
             «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
             $from, "$user\@$ip:$to";
     }
+}
 
+method sync-vm-doc {
+    my ($ip, $user, $dir-to, $dir-from) = self!sync-vm-creds;
     self!run-doc-out(«git status --porcelain»).lines.map: {
         my $file := .trim.split(/\s+/, 2).tail;
         my $from := "$dir-from/doc/$file";
@@ -285,7 +297,10 @@ method sync-vm {
             «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
             $from, "$user\@$ip:$to";
     }
+}
 
+method sync-vm-moar {
+    my ($ip, $user, $dir-to, $dir-from) = self!sync-vm-creds;
     self!run-moar-out(«git status --porcelain»).lines.map: {
         my $file := .trim.split(/\s+/, 2).tail;
         my $from := "$dir-from/MoarVM/$file";
@@ -294,7 +309,10 @@ method sync-vm {
             «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
             $from, "$user\@$ip:$to";
     }
+}
 
+method sync-vm-nqp {
+    my ($ip, $user, $dir-to, $dir-from) = self!sync-vm-creds;
     self!run-nqp-out(«git status --porcelain»).lines.map: {
         my $file := .trim.split(/\s+/, 2).tail;
         my $from := "$dir-from/nqp/$file";
@@ -303,7 +321,10 @@ method sync-vm {
             «rsync -avz --del -h --exclude .precomp --delete-missing-args»,
             $from, "$user\@$ip:$to";
     }
+}
 
+method sync-vm-rak {
+    my ($ip, $user, $dir-to, $dir-from) = self!sync-vm-creds;
     self!run-rak-out(«git status --porcelain»).lines.map: {
         my $file := .trim.split(/\s+/, 2).tail;
         my $from := "$dir-from/rakudo/$file";

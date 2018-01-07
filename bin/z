@@ -81,6 +81,9 @@ multi MAIN('conf', Str:D $conf-prop-name, Str:D $value) {
 multi MAIN('vm', Str:D $ip where /^\s*[\d**1..3\.]**3\d**1..3\s*$/) {
     say "Saved VM IP as " ~ $rd.set-conf: 'vm-ip', $ip.trim;
 }
-multi MAIN('vm') {
-    $rd.sync-vm;
-}
+multi MAIN('vm')   { $rd.sync-vm      }
+multi MAIN('vm s') { $rd.sync-vm-spec }
+multi MAIN('vm d') { $rd.sync-vm-doc  }
+multi MAIN('vm m') { $rd.sync-vm-moar }
+multi MAIN('vm n') { $rd.sync-vm-nqp  }
+multi MAIN('vm r') { $rd.sync-vm-rak  }

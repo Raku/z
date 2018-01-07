@@ -55,8 +55,13 @@ z conf                     # print all configuration
 z conf dir                 # print value for configuration key "dir"
 z conf dir /home/zoffix/R  # set config key "dir" to value "/home/zoffix/R"
 
-vm                  # rsyncs all local changes to VM
 vm 111.222.333.444  # set VM IP to given IP (trims surrounding whitespace)
+vm                  # rsyncs all local changes to VM
+vm s                # sync spec changes
+vm d                # sync doc changes
+vm m                # sync moar changes
+vm n                # sync nqp changes
+vm r                # sync rakudo changes
 ```
 
 ----
