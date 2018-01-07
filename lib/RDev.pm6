@@ -176,6 +176,9 @@ method stresstest {
     self!run-rak: «make test»;
     self!run-rak: «make stresstest»;
 }
+method fudge-test (*@tests) {
+    self!run-rak: 't/fudgeandrun', @tests;
+}
 
 method re-make-moar-debug {
     self!run-moar: «perl Configure.pl "--prefix=$!inst" --no-optimize»;

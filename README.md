@@ -37,6 +37,7 @@ z mnd            # re-make MoarVM after reconf with no DEBUG
 z s              # run rakudo's make test + spectest
 z ss             # run rakudo's make test + stresstest
 z bs             # run "best test" (have > 10 cores ?? stresstest !! spectest)
+z t some files   # run t/fudgeandrun some files
 
 z bump           # bump MoarVM and nqp + best test + bump push on success
 z bump --no-push # bump MoarVM and nqp + best test, but don't push
