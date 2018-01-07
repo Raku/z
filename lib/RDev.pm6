@@ -218,12 +218,14 @@ method build-rakudo (Bool :$test) {
     self!run-rak: «make install»;
 }
 
+method !run-inst (|c) { run :cwd($!inst), |c }
 method !run-moar (|c) { run :cwd($!moar), |c }
 method !run-nqp  (|c) { run :cwd($!nqp),  |c }
 method !run-rak  (|c) { run :cwd($!rak),  |c }
 method !run-spec (|c) { run :cwd($!spec), |c }
 method !run-doc  (|c) { run :cwd($!doc),  |c }
 
+method !run-inst-out (|c) { self!run-inst(|c, :out).out.slurp(:close).trim }
 method !run-moar-out (|c) { self!run-moar(|c, :out).out.slurp(:close).trim }
 method !run-nqp-out  (|c) { self!run-nqp( |c, :out).out.slurp(:close).trim }
 method !run-rak-out  (|c) { self!run-rak( |c, :out).out.slurp(:close).trim }
@@ -244,4 +246,31 @@ multi method print-conf (Whatever) {
 method set-conf (Str:D $prop, Str:D $value) {
     &!cw($prop, $value);
     $value
+}
+
+method sync-vm {
+    my ($ip, $user, $dir-to, $dir-from)
+    = &!c('vm-ip'), &!c('vm-user'), &!c('vm-dir'), &!c('dir');
+    if $ip ~~ Failure {
+        $ip = trim prompt 'No VM IP. Gimme: ';
+        &!cw('vm-ip', $ip)
+    }
+    if $user ~~ Failure {
+        $user = trim prompt 'No VM user. Gimme: ';
+        &!cw('vm-user', $user)
+    }
+    if $dir-to ~~ Failure {
+        my $dir = prompt "No VM dir specified. What to use? [$dir-from]: ";
+        $dir-to = $dir || $dir-from;
+        $dir-to.IO.is-absolute or die "Must be absolute path";
+        &!cw('vm-dir', $dir-to);
+    }
+
+    # rsync cares a lot about trailing slashes
+    .subst: / '/'+ $ /, '' for $dir-o, $dir-from;
+
+    self!run-inst: «
+        rsync -avz --del -h --exclude .precomp
+        "$dir-from" "$user\@$ip:$dir-to"
+    »
 }
