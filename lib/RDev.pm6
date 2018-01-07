@@ -267,7 +267,7 @@ method sync-vm {
     }
 
     # rsync cares a lot about trailing slashes
-    .subst: / '/'+ $ /, '' for $dir-o, $dir-from;
+    .subst: / '/'+ $ /, '' for $dir-to, $dir-from;
 
     self!run-inst: «
         rsync -avz --del -h --exclude .precomp
