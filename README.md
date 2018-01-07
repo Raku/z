@@ -12,8 +12,7 @@ zef --depsonly install .
 echo 'export PATH="$HOME/zscript/bin:$PATH"' >> ~/.bashrc
 . ~/.bashrc
 
-pico ~/zscript/config.json
-# set your build directory and other config, save, and close
+z init ~/R # or some other dir you wanna use for all the repos
 ```
 
 **This installs command `z` into your PATH.**
