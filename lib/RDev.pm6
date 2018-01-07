@@ -339,7 +339,7 @@ method sync-vm-rak {
 }
 
 method vm-SCRUB {
-    if prompt('SCRUB stuff? Are you sure? [Y/n]: ').lc eq 'y' {
+    if prompt('SCRUB stuff? Are you sure? [y/N]: ').lc eq 'y' {
         self!run-moar: «git reset --hard»;
         self!run-nqp:  «git reset --hard»;
         self!run-rak:  «git reset --hard»;
