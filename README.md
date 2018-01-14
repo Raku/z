@@ -67,6 +67,10 @@ vm SCRUB            # run `git reset --hard` in all local repos and pull
                     # Yup. LOCAL, not VM. It's under `vm` because you'd use
                     # this command to sync local when editing locally and
                     # committing remotely
+
+
+z q  # opens Grammar/Actions/World/Optimizer in atom editor; assumes we're
+     # in the root of a rakudo checkout
 ```
 
 ----
