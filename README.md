@@ -71,6 +71,9 @@ vm SCRUB            # run `git reset --hard` in all local repos and pull
 
 z q  # opens Grammar/Actions/World/Optimizer in atom editor; assumes we're
      # in the root of a rakudo checkout
+
+z r Some Command    # run Some Command in all the repos (may have issues with
+                    # named args)
 ```
 
 ----

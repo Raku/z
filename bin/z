@@ -128,3 +128,10 @@ multi MAIN('q') {
     run «atom src/Perl6/Grammar.nqp  src/Perl6/Actions.nqp
               src/Perl6/World.nqp    src/Perl6/Optimizer.nqp»;
 }
+
+
+### Exec options
+#|(run a command in all repos)
+multi MAIN('r', *@args) {
+    $rd.run-in-all: @args
+}

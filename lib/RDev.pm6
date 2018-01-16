@@ -144,6 +144,19 @@ method !pull-rak  { self!run-rak:  «git pull --rebase» }
 method !pull-spec { self!run-spec: «git pull --rebase» }
 method !pull-doc  { self!run-doc:  «git pull --rebase» }
 
+method run-in-all (@args) {
+    say "Running in MoarVM";
+    my $ = self!run-moar: @args;
+    say "Running in NQP";
+    my $ = self!run-nqp: @args;
+    say "Running in Rakudo";
+    my $ = self!run-rak: @args;
+    say "Running in Roast";
+    my $ = self!run-spec: @args;
+    say "Running in Docs";
+    my $ = self!run-doc: @args;
+}
+
 method !init-zef {
     temp %*ENV<PATH> = my $path = join ($*DISTRO.is-win ?? ";" !! ":"),
         $!inst.IO.add('bin').absolute,
