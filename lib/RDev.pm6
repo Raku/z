@@ -144,7 +144,7 @@ method !pull-rak  { self!run-rak:  «git pull --rebase» }
 method !pull-spec { self!run-spec: «git pull --rebase» }
 method !pull-doc  { self!run-doc:  «git pull --rebase» }
 
-method run-in-all (@args) {
+method run-in-all (@args --> Nil) {
     say "Running in MoarVM";
     my $ = self!run-moar: @args;
     say "Running in NQP";

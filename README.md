@@ -74,6 +74,13 @@ z q  # opens Grammar/Actions/World/Optimizer in atom editor; assumes we're
 
 z r Some Command    # run Some Command in all the repos (may have issues with
                     # named args)
+
+
+                    # full-cycle builds are only needed when you need to
+                    # re-run Configure.pl if, say, core files were added/deleted
+z build moar        # full-cycle build moarvm
+z build nqp         # full-cycle build nqp
+z build rakudo      # full-cycle build rakduo
 ```
 
 ----

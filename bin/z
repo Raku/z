@@ -75,6 +75,12 @@ multi MAIN('init', $dir = '.'.IO) {
     $rd.make-links;
     MAIN 'modi5';
 }
+#|(use full cycle to build moar)
+multi MAIN('build', 'moar')   { $rd.build-moar; }
+#|(use full cycle to build nqp)
+multi MAIN('build', 'nqp')    { $rd.build-nqp:   :test; }
+#|(use full cycle to build rakudo)
+multi MAIN('build', 'rakudo') { $rd.build-rakudo :test; }
 
 #|(install Inline::Perl5)
 multi MAIN('modi5') {
