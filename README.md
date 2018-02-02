@@ -23,7 +23,7 @@ z init ~/R # or some other dir you wanna use for all the repos
 z init Some-Dir  # clone all repos and build everything inside Some-Dir
                  # Some-Dir defaults to `.`; must be empty
 
-z z              # pulls all repos and rebuilds MoarVM, nqp, and Rakudo
+z z              # pulls all repos and rebuilds MoarVM, nqp, and Rakudo from scratch
 z f              # pulls updates into all repos
 z                # re-make rakudo
 z --test         # re-make rakudo + run make test

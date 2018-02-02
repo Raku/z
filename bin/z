@@ -14,12 +14,12 @@ multi MAIN(Bool :$test) {
     $rd.re-make-rakudo: :$test;
 }
 
-#|(pull all and rebuild all)
+#|(pull all and rebuild all from scratch)
 multi MAIN('z') {
     $rd.pull-all;
     $rd.build-moar;
-    $rd.re-make-nqp;
-    $rd.re-make-rakudo: :clean;
+    $rd.build-nqp: :test;
+    $rd.build-rakudo: :test;
 }
 #|(pull all)
 multi MAIN('f') { $rd.pull-all; }
