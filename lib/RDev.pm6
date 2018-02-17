@@ -16,7 +16,7 @@ has Int $!cores = Kernel.cpu-cores * 2;
 
 submethod TWEAK { self!init-dirs }
 method !init-dirs {
-    with &!c('dir') -> IO() $_ {
+    with (%*ENV<ZSCRIPT_DIR> || &!c('dir')) -> IO() $_ {
         $!dir  = $_;
         $!rak  = .add('rakudo' ).absolute;
         $!nqp  = .add('nqp'    ).absolute;

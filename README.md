@@ -17,6 +17,12 @@ z init ~/R # or some other dir you wanna use for all the repos
 
 **This installs command `z` into your PATH.**
 
+# ENV VARS
+
+You can set `ZSCRIPT_DIR` env var to change which build dir Z-Script uses.
+Otherwise, `dir` config value is used (this is the dir you provided to
+`z init`). This var allows you to have multiple build dirs.
+
 # COMMAND REFERENCE
 
 ```
