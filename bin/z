@@ -15,11 +15,11 @@ multi MAIN(Bool :$test) {
 }
 
 #|(pull all and rebuild all from scratch)
-multi MAIN('z', Bool :$jvm) {
+multi MAIN('z', Bool :$test = True, Bool :$jvm) {
     $rd.pull-all;
     $rd.build-moar;
-    $rd.build-nqp: :test, :$jvm;
-    $rd.build-rakudo: :test, :$jvm;
+    $rd.build-nqp: :$test, :$jvm;
+    $rd.build-rakudo: :$test, :$jvm;
 }
 #|(pull all)
 multi MAIN('f') { $rd.pull-all; }
@@ -67,11 +67,11 @@ multi MAIN('bump', 'push', 'm') { $rd.bump-push-moar; }
 multi MAIN('bump', 'push', 'n') { $rd.bump-push-nqp;  }
 
 #|(initialize new install, cloning all repos into dir)
-multi MAIN('init', $dir = '.'.IO, Bool :$jvm) {
+multi MAIN('init', $dir = '.'.IO, Bool :$jvm, Bool :$test = True) {
     $rd.init: $dir;
     $rd.build-moar;
-    $rd.build-nqp:    :test, :$jvm;
-    $rd.build-rakudo: :test, :$jvm;
+    $rd.build-nqp:    :$test, :$jvm;
+    $rd.build-rakudo: :$test, :$jvm;
     $rd.make-links;
     MAIN 'modi5';
 }
