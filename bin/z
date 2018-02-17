@@ -70,8 +70,8 @@ multi MAIN('bump', 'push', 'n') { $rd.bump-push-nqp;  }
 multi MAIN('init', $dir = '.'.IO, Bool :$jvm) {
     $rd.init: $dir;
     $rd.build-moar;
-    $rd.build-nqp:   :test, :$jvm;
-    $rd.build-rakudo :test, :$jvm;
+    $rd.build-nqp:    :test, :$jvm;
+    $rd.build-rakudo: :test, :$jvm;
     $rd.make-links;
     MAIN 'modi5';
 }
