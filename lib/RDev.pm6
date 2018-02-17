@@ -220,16 +220,16 @@ method build-moar {
     self!run-moar: «make install»;
 }
 
-method build-nqp(Bool :$test, Bool :$jvm) {
-    my $b = 'moar' ~ (',jvm' with $jvm);
+method build-nqp(Bool :$test, Bool :$jvm, Bool :$moar = True) {
+    my $b = join ',', ('moar' with $moar), ('jvm' with $jvm);
     self!run-nqp: «perl Configure.pl "--prefix=$!inst" "--backends=$b"»;
     self!run-nqp: «make "-j$!cores"»;
     self!run-nqp: «make test» if $test;
     self!run-nqp: «make install»;
 }
 
-method build-rakudo (Bool :$test, Bool :$jvm) {
-    my $b = 'moar' ~ (',jvm' with $jvm);
+method build-rakudo (Bool :$test, Bool :$jvm, Bool :$moar = True) {
+    my $b = join ',', ('moar' with $moar), ('jvm' with $jvm);
     self!run-rak: «perl Configure.pl "--prefix=$!inst" "--backends=$b"»;
     self!run-rak: «make "-j$!cores"»;
     self!run-rak: «make test» if $test;
