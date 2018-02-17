@@ -15,11 +15,11 @@ multi MAIN(Bool :$test) {
 }
 
 #|(pull all and rebuild all from scratch)
-multi MAIN('z') {
+multi MAIN('z', Bool :$jvm) {
     $rd.pull-all;
     $rd.build-moar;
-    $rd.build-nqp: :test;
-    $rd.build-rakudo: :test;
+    $rd.build-nqp: :test, :$jvm;
+    $rd.build-rakudo: :test, :$jvm;
 }
 #|(pull all)
 multi MAIN('f') { $rd.pull-all; }
@@ -67,20 +67,20 @@ multi MAIN('bump', 'push', 'm') { $rd.bump-push-moar; }
 multi MAIN('bump', 'push', 'n') { $rd.bump-push-nqp;  }
 
 #|(initialize new install, cloning all repos into dir)
-multi MAIN('init', $dir = '.'.IO) {
+multi MAIN('init', $dir = '.'.IO, Bool :$jvm) {
     $rd.init: $dir;
     $rd.build-moar;
-    $rd.build-nqp:   :test;
-    $rd.build-rakudo :test;
+    $rd.build-nqp:   :test, :$jvm;
+    $rd.build-rakudo :test, :$jvm;
     $rd.make-links;
     MAIN 'modi5';
 }
 #|(use full cycle to build moar)
 multi MAIN('build', 'moar')   { $rd.build-moar; }
 #|(use full cycle to build nqp)
-multi MAIN('build', 'nqp')    { $rd.build-nqp:   :test; }
+multi MAIN('build', 'nqp', Bool :$jvm)    { $rd.build-nqp:   :test, :$jvm; }
 #|(use full cycle to build rakudo)
-multi MAIN('build', 'rakudo') { $rd.build-rakudo :test; }
+multi MAIN('build', 'rakudo', Bool :$jvm) { $rd.build-rakudo :test, :$jvm; }
 
 #|(install Inline::Perl5)
 multi MAIN('modi5') {

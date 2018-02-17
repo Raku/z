@@ -25,6 +25,9 @@ Otherwise, `dir` config value is used (this is the dir you provided to
 
 # COMMAND REFERENCE
 
+**BELOW LIST IS NO LONGER KEPT UP-TO-DATE. RUN `z --help` TO SEE ALL THE
+OPTIONS*
+
 ```
 z init Some-Dir  # clone all repos and build everything inside Some-Dir
                  # Some-Dir defaults to `.`; must be empty
