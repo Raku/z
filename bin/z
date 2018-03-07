@@ -47,8 +47,9 @@ multi MAIN('t', *@tests) { $rd.fudge-test: @tests; }
 #|(bump moar and rakudo, run "best", test and push)
 multi MAIN('bump', Bool :$no-push) {
     $rd.bump-nqp: $rd.bump-moar;
-    $rd.re-make-nqp:    :test;
-    $rd.re-make-rakudo: :test, :clean;
+    $rd.build-moar;
+    $rd.build-nqp:    :test;
+    $rd.build-rakudo: :test;
     unless $rd.best-test {
         exit if $no-push
             or 'y' ne lc prompt 'Had some test failures. Push anyway? [N/y]: '
