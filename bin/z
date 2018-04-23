@@ -17,7 +17,7 @@ multi MAIN(Bool :$test) {
 #|(pull all and rebuild all from scratch)
 multi MAIN('z', Bool :$test = True, Bool :$jvm, Bool :$moar = True) {
     $rd.pull-all;
-    $rd.build-moar;
+    $rd.build-moar if $moar;
     $rd.build-nqp:    :$test, :$jvm, :$moar;
     $rd.build-rakudo: :$test, :$jvm, :$moar;
 }
