@@ -72,7 +72,7 @@ multi MAIN('init', $dir = '.'.IO,
     Bool :$jvm, Bool :$moar = True, Bool :$test = True
 ) {
     $rd.init: $dir;
-    $rd.build-moar;
+    $rd.build-moar if $moar;
     $rd.build-nqp:    :$test, :$jvm, :$moar;
     $rd.build-rakudo: :$test, :$jvm, :$moar;
     $rd.make-links;
