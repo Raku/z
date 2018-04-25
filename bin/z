@@ -81,12 +81,12 @@ multi MAIN('init', $dir = '.'.IO,
 #|(use full cycle to build moar)
 multi MAIN('build', 'moar')   { $rd.build-moar; }
 #|(use full cycle to build nqp)
-multi MAIN('build', 'nqp', Bool :$jvm, Bool :$moar = True) {
-    $rd.build-nqp:   :test, :$jvm, :$moar;
+multi MAIN('build', 'nqp', Bool :$jvm, Bool :$moar = True, Bool :$test) {
+    $rd.build-nqp:   :$test, :$jvm, :$moar;
 }
 #|(use full cycle to build rakudo)
-multi MAIN('build', 'rakudo', Bool :$jvm, Bool :$moar = True) {
-    $rd.build-rakudo :test, :$jvm, :$moar;
+multi MAIN('build', 'rakudo', Bool :$jvm, Bool :$moar = True, Bool :$test) {
+    $rd.build-rakudo :$test, :$jvm, :$moar;
 }
 
 #|(install Inline::Perl5)
