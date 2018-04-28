@@ -224,7 +224,7 @@ method build-moar {
 }
 
 method build-nqp(Bool :$test, Bool :$jvm, Bool :$moar = True) {
-    my $b = join ',', ('moar' with $moar), ('jvm' with $jvm);
+    my $b = join ',', ('moar' if $moar), ('jvm' if $jvm);
     (self!run-rak: «make realclean»).so;
     self!run-nqp: «perl Configure.pl "--prefix=$!inst" "--backends=$b"»;
     self!run-nqp: «make "-j$!cores"»;
@@ -233,7 +233,7 @@ method build-nqp(Bool :$test, Bool :$jvm, Bool :$moar = True) {
 }
 
 method build-rakudo (Bool :$test, Bool :$jvm, Bool :$moar = True) {
-    my $b = join ',', ('moar' with $moar), ('jvm' with $jvm);
+    my $b = join ',', ('moar' if $moar), ('jvm' if $jvm);
     (self!run-rak: «make realclean»).so;
     self!run-rak: «perl Configure.pl "--prefix=$!inst" "--backends=$b"»;
     self!run-rak: «make "-j$!cores"»;
