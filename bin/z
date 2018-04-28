@@ -73,7 +73,11 @@ multi MAIN('init', $dir = '.'.IO,
     Bool :$clone-only,
 ) {
     $rd.init: $dir;
-    say "--clone-only set; exiting without building" if $clone-only;
+    if $clone-only {
+        say "--clone-only set; exiting without building";
+        $rd.make-links;
+        exit;
+    }
     $rd.build-moar if $moar;
     $rd.build-nqp:    :$test, :$jvm, :$moar;
     $rd.build-rakudo: :$test, :$jvm, :$moar;
@@ -88,7 +92,7 @@ multi MAIN('build', 'nqp', Bool :$jvm, Bool :$moar = True, Bool :$test) {
 }
 #|(use full cycle to build rakudo)
 multi MAIN('build', 'rakudo', Bool :$jvm, Bool :$moar = True, Bool :$test) {
-    $rd.build-rakudo :$test, :$jvm, :$moar;
+    $rd.build-rakudo: :$test, :$jvm, :$moar;
 }
 
 #|(install Inline::Perl5)
