@@ -69,9 +69,11 @@ multi MAIN('bump', 'push', 'n') { $rd.bump-push-nqp;  }
 
 #|(initialize new install, cloning all repos into dir)
 multi MAIN('init', $dir = '.'.IO,
-    Bool :$jvm, Bool :$moar = True, Bool :$test = True
+    Bool :$jvm, Bool :$moar = True, Bool :$test = True,
+    Bool :$clone-only,
 ) {
     $rd.init: $dir;
+    say "--clone-only set; exiting without building" if $clone-only;
     $rd.build-moar if $moar;
     $rd.build-nqp:    :$test, :$jvm, :$moar;
     $rd.build-rakudo: :$test, :$jvm, :$moar;
