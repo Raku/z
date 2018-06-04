@@ -26,7 +26,8 @@ method !init-dirs {
         $!spec = .add('rakudo/t/spec/').absolute;
     }
     else {
-        warn '"dir" key not found in config. Please run `--init` command'
+        warn '"dir" key not found in config. Please run `init` command.'
+        ~ ' If you are running it right now, then ignore this warning'.
     }
 }
 
