@@ -27,7 +27,7 @@ method !init-dirs {
     }
     else {
         warn '"dir" key not found in config. Please run `init` command.'
-        ~ ' If you are running it right now, then ignore this warning'.
+        ~ ' If you are running it right now, then ignore this warning.'
     }
 }
 
