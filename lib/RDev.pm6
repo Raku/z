@@ -66,7 +66,10 @@ method bump-moar {
     $ver-file.spurt: "$after\n";
 
     my $log = self!run-moar-out: «git log --oneline "$before...$after"»;
-    my $n-commits = +$log.lines;
+    unless my $n-commits := +$log.lines {
+        note "\n\n### No fresh commits in MoarVM; no bumping is needed\n\n";
+        exit;
+    }
     my $title = "[MoarVM Bump] Brings $n-commits commit"
         ~ ("s" if $n-commits > 1);
 
@@ -97,7 +100,10 @@ method bump-nqp (Str:D $moar-log = '') {
     $ver-file.spurt: "$after\n";
 
     my $log = self!run-nqp-out: «git log --oneline "$before...$after"»;
-    my $n-commits = +$log.lines;
+    unless my $n-commits := +$log.lines {
+        note "\n\n### No fresh commits in NQP; no bumping is needed\n\n";
+        exit;
+    }
     my $title = "[NQP Bump] Brings $n-commits commit"
         ~ ("s" if $n-commits > 1);
     if $log.lines == 1 {
