@@ -203,7 +203,7 @@ method fudge-test (*@tests) {
 }
 
 method re-make-moar-debug {
-    self!run-moar: «perl Configure.pl "--prefix=$!inst" --no-optimize --debug»;
+    self!run-moar: «perl Configure.pl "--prefix=$!inst" --no-optimize --debug=3»;
     self.re-make-moar
 }
 method re-make-moar {
