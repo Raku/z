@@ -55,7 +55,7 @@ method bump-moar {
     self!pull-moar;
     self!pull-nqp;
 
-    my $ver-file = $!nqp.IO.add: 'tools/build/MOAR_REVISION';
+    my $ver-file = $!nqp.IO.add: 'tools/templates/MOAR_REVISION';
 
     my $before = $ver-file.slurp.trim;
     my $after  = self!run-moar-out: «git describe»;
@@ -89,7 +89,7 @@ method bump-nqp (Str:D $moar-log = '') {
     self!pull-nqp;
     self!pull-rak;
 
-    my $ver-file = $!rak.IO.add: 'tools/build/NQP_REVISION';
+    my $ver-file = $!rak.IO.add: 'tools/templates/NQP_REVISION';
 
     my $before = $ver-file.slurp.trim;
     my $after  = self!run-nqp-out: «git describe»;
