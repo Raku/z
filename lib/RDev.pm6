@@ -39,7 +39,7 @@ method init (IO() $!dir = '.'.IO) {
     run «git clone https://github.com/rakudo/rakudo "$!rak"»;
     run «git clone https://github.com/perl6/roast   "$!spec"»;
     run «git clone https://github.com/perl6/nqp     "$!nqp"»;
-    run «git clone https://github.com/perl6/doc     "$!doc"»;
+    run «git clone https://github.com/Raku/doc      "$!doc"»;
     run «git clone https://github.com/MoarVM/MoarVM "$!moar"»;
 }
 
