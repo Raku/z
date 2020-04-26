@@ -37,9 +37,9 @@ method init (IO() $!dir = '.'.IO) {
     self!init-dirs;
     .mkdir for $!dir, $!rak.IO, $!nqp.IO, $!moar.IO, $!inst.IO;
     run «git clone https://github.com/rakudo/rakudo "$!rak"»;
-    run «git clone https://github.com/perl6/roast   "$!spec"»;
-    run «git clone https://github.com/perl6/nqp     "$!nqp"»;
-    run «git clone https://github.com/perl6/doc     "$!doc"»;
+    run «git clone https://github.com/Raku/roast   "$!spec"»;
+    run «git clone https://github.com/Raku/nqp     "$!nqp"»;
+    run «git clone https://github.com/Raku/doc     "$!doc"»;
     run «git clone https://github.com/MoarVM/MoarVM "$!moar"»;
 }
 
