@@ -144,7 +144,7 @@ multi MAIN('vm', 'SCRUB') { $rd.vm-SCRUB }
 ### Editor options
 #|(open atom to Grammar/Actions/World/Optimizer)
 multi MAIN('q') {
-    run «atom src/Perl6/Grammar.nqp  src/Perl6/Actions.nqp
+    $rd.run-rak: %*ENV<VISUAL> || 'atom', «src/Perl6/Grammar.nqp  src/Perl6/Actions.nqp
               src/Perl6/World.nqp    src/Perl6/Optimizer.nqp»;
 }
 

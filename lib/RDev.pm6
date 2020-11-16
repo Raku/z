@@ -252,6 +252,7 @@ method !run-inst (|c) { run :cwd($!inst), |c }
 method !run-moar (|c) { run :cwd($!moar), |c }
 method !run-nqp  (|c) { run :cwd($!nqp),  |c }
 method !run-rak  (|c) { run :cwd($!rak),  |c }
+method run-rak  (|c) { self!run-rak: |c }
 method !run-spec (|c) { run :cwd($!spec), |c }
 method !run-doc  (|c) { run :cwd($!doc),  |c }
 
