@@ -17,6 +17,18 @@ z init ~/R # or some other dir you wanna use for all the repos
 
 **This installs command `z` into your PATH.**
 
+If you want to call `z` by a different name (for instance, if you use the popular [`z` script](/rupa/z) included in several Linux distributions), you should be aware that (this) `z` uses libraries relative to its own directory. So some typical workarounds for this, like creating a _~/bin/p6z_ → _~/zscript/bin/z_ symbolic link, will make `z` run incorrectly.
+
+The easiest way to deal with this is by using a shell alias (_instead_ of the above):
+
+```bash
+echo 'alias p6z="$HOME/zscript/bin/z"' >> ~/.bashrc
+. ~/.bashrc
+
+p6z init ~/R
+```
+
+
 # ENV VARS
 
 You can set `ZSCRIPT_DIR` env var to change which build dir Z-Script uses.
