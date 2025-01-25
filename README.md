@@ -1,6 +1,6 @@
 # Z-Script
 
-Helper script for Rakudo Perl 6 core development
+Helper script for Rakudo core development
 
 # INSTALLATION
 
